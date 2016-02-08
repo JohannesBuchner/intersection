@@ -60,3 +60,7 @@
 <img src="eq40.png" alt="2 \left\lvert{\sqrt{R^{2} + \frac{x_{0}^{2}}{2} \cos{\left (2 \phi \right )} - \frac{x_{0}^{2}}{2} + x_{0} y_{0} \sin{\left (2 \phi \right )} - \frac{y_{0}^{2}}{2} \cos{\left (2 \phi \right )} - \frac{y_{0}^{2}}{2}}}\right\rvert" />
 <h4>C Code</h4>
 <pre>sol1 = -x0*cos(phi) - y0*sin(phi) - sqrt(pow(R, 2) + (1.0L/2.0L)*pow(x0, 2)*cos(2*phi) - 1.0L/2.0L*pow(x0, 2) + x0*y0*sin(2*phi) - 1.0L/2.0L*pow(y0, 2)*cos(2*phi) - 1.0L/2.0L*pow(y0, 2));</pre><pre>sol2 = -x0*cos(phi) - y0*sin(phi) + sqrt(pow(R, 2) + (1.0L/2.0L)*pow(x0, 2)*cos(2*phi) - 1.0L/2.0L*pow(x0, 2) + x0*y0*sin(2*phi) - 1.0L/2.0L*pow(y0, 2)*cos(2*phi) - 1.0L/2.0L*pow(y0, 2));</pre><pre>distance = 2*fabs(sqrt(pow(R, 2) + (1.0L/2.0L)*pow(x0, 2)*cos(2*phi) - 1.0L/2.0L*pow(x0, 2) + x0*y0*sin(2*phi) - 1.0L/2.0L*pow(y0, 2)*cos(2*phi) - 1.0L/2.0L*pow(y0, 2)));</pre><hr/>
+<hr/>
+<p>By Johannes Buchner | Source code: <a href="https://github.com/JohannesBuchner/intersection">https://github.com/JohannesBuchner/intersection</a> |
+Open a issue or pull request if you would like somthing added</p>
+
