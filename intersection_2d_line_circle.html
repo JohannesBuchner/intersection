@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8">
+      <title>2d_line - circle intersection -- Intersection formulas for 3d objects</title>
+  </head>
+  <body>
+<h2>2d_line - circle intersection</h2>
+<h4>Equation for 2d_line (cartesian)</h4>
+<ul>
+<li>x: <img src="eq21.png" alt="t + x_{0}" /></li>
+<li>y: <img src="eq22.png" alt="k t + y_{0}" /></li>
+</ul>
+<h4>Equation for circle (cartesian)</h4>
+<p>Assumed to be centred at 0, the coordinate system origin.</p>
+0=<img src="eq23.png" alt="-1 + \frac{x^{2}}{R^{2}} + \frac{y^{2}}{R^{2}}" />
+<h4>Intersection solutions</h4>
+<p>Parametric solution (t). Solutions were derived automatically using sympy.</p>
+<ul><li><img src="eq24.png" alt="\frac{1}{k^{2} + 1} \left(- k y_{0} - x_{0} + \sqrt{R^{2} k^{2} + R^{2} - k^{2} x_{0}^{2} + 2 k x_{0} y_{0} - y_{0}^{2}}\right)" /></li>
+<li><img src="eq25.png" alt="- \frac{1}{k^{2} + 1} \left(k y_{0} + x_{0} + \sqrt{R^{2} k^{2} + R^{2} - k^{2} x_{0}^{2} + 2 k x_{0} y_{0} - y_{0}^{2}}\right)" /></li>
+</ul><p>Points in cartesian coordinates (x, y, z)</p>
+<ul><li><ul><li>x: <img src="eq26.png" alt="x_{0} + \frac{1}{k^{2} + 1} \left(- k y_{0} - x_{0} + \sqrt{R^{2} k^{2} + R^{2} - k^{2} x_{0}^{2} + 2 k x_{0} y_{0} - y_{0}^{2}}\right)" /></li>
+<li>y: <img src="eq27.png" alt="\frac{k}{k^{2} + 1} \left(- k y_{0} - x_{0} + \sqrt{R^{2} k^{2} + R^{2} - k^{2} x_{0}^{2} + 2 k x_{0} y_{0} - y_{0}^{2}}\right) + y_{0}" /></li>
+</ul></li><li><ul><li>x: <img src="eq28.png" alt="x_{0} - \frac{1}{k^{2} + 1} \left(k y_{0} + x_{0} + \sqrt{R^{2} k^{2} + R^{2} - k^{2} x_{0}^{2} + 2 k x_{0} y_{0} - y_{0}^{2}}\right)" /></li>
+<li>y: <img src="eq29.png" alt="- \frac{k}{k^{2} + 1} \left(k y_{0} + x_{0} + \sqrt{R^{2} k^{2} + R^{2} - k^{2} x_{0}^{2} + 2 k x_{0} y_{0} - y_{0}^{2}}\right) + y_{0}" /></li>
+</ul></li></ul><h5>C Code</h5>
+<pre>x = x0 + (-k*y0 - x0 + sqrt(pow(R, 2)*pow(k, 2) + pow(R, 2) - pow(k, 2)*pow(x0, 2) + 2*k*x0*y0 - pow(y0, 2)))/(pow(k, 2) + 1);</pre>
+<pre>y = k*(-k*y0 - x0 + sqrt(pow(R, 2)*pow(k, 2) + pow(R, 2) - pow(k, 2)*pow(x0, 2) + 2*k*x0*y0 - pow(y0, 2)))/(pow(k, 2) + 1) + y0;</pre>
+<pre>x = x0 - (k*y0 + x0 + sqrt(pow(R, 2)*pow(k, 2) + pow(R, 2) - pow(k, 2)*pow(x0, 2) + 2*k*x0*y0 - pow(y0, 2)))/(pow(k, 2) + 1);</pre>
+<pre>y = -k*(k*y0 + x0 + sqrt(pow(R, 2)*pow(k, 2) + pow(R, 2) - pow(k, 2)*pow(x0, 2) + 2*k*x0*y0 - pow(y0, 2)))/(pow(k, 2) + 1) + y0;</pre>
+<h4>Distance inside</h4>
+<p>Distance between crossing points.</p>
+<img src="eq30.png" alt="2 \left\lvert{\frac{1}{k^{2} + 1} \sqrt{R^{2} k^{2} + R^{2} - k^{2} x_{0}^{2} + 2 k x_{0} y_{0} - y_{0}^{2}}}\right\rvert" />
+<h4>C Code</h4>
+<pre>sol1 = (-k*y0 - x0 + sqrt(pow(R, 2)*pow(k, 2) + pow(R, 2) - pow(k, 2)*pow(x0, 2) + 2*k*x0*y0 - pow(y0, 2)))/(pow(k, 2) + 1);</pre><pre>sol2 = -(k*y0 + x0 + sqrt(pow(R, 2)*pow(k, 2) + pow(R, 2) - pow(k, 2)*pow(x0, 2) + 2*k*x0*y0 - pow(y0, 2)))/(pow(k, 2) + 1);</pre><pre>distance = 2*fabs(sqrt(pow(R, 2)*pow(k, 2) + pow(R, 2) - pow(k, 2)*pow(x0, 2) + 2*k*x0*y0 - pow(y0, 2))/(pow(k, 2) + 1));</pre><hr/>
+<h4>Equation for 2d_line (spherical)</h4>
+<ul>
+<li>x: <img src="eq31.png" alt="t \cos{\left (\phi \right )} + x_{0}" /></li>
+<li>y: <img src="eq32.png" alt="t \sin{\left (\phi \right )} + y_{0}" /></li>
+</ul>
+<h4>Equation for circle (cartesian)</h4>
+<p>Assumed to be centred at 0, the coordinate system origin.</p>
+0=<img src="eq33.png" alt="-1 + \frac{x^{2}}{R^{2}} + \frac{y^{2}}{R^{2}}" />
+<h4>Intersection solutions</h4>
+<p>Parametric solution (t). Solutions were derived automatically using sympy.</p>
+<ul><li><img src="eq34.png" alt="- x_{0} \cos{\left (\phi \right )} - y_{0} \sin{\left (\phi \right )} - \sqrt{R^{2} + \frac{x_{0}^{2}}{2} \cos{\left (2 \phi \right )} - \frac{x_{0}^{2}}{2} + x_{0} y_{0} \sin{\left (2 \phi \right )} - \frac{y_{0}^{2}}{2} \cos{\left (2 \phi \right )} - \frac{y_{0}^{2}}{2}}" /></li>
+<li><img src="eq35.png" alt="- x_{0} \cos{\left (\phi \right )} - y_{0} \sin{\left (\phi \right )} + \sqrt{R^{2} + \frac{x_{0}^{2}}{2} \cos{\left (2 \phi \right )} - \frac{x_{0}^{2}}{2} + x_{0} y_{0} \sin{\left (2 \phi \right )} - \frac{y_{0}^{2}}{2} \cos{\left (2 \phi \right )} - \frac{y_{0}^{2}}{2}}" /></li>
+</ul><p>Points in cartesian coordinates (x, y, z)</p>
+<ul><li><ul><li>x: <img src="eq36.png" alt="x_{0} + \left(- x_{0} \cos{\left (\phi \right )} - y_{0} \sin{\left (\phi \right )} - \sqrt{R^{2} + \frac{x_{0}^{2}}{2} \cos{\left (2 \phi \right )} - \frac{x_{0}^{2}}{2} + x_{0} y_{0} \sin{\left (2 \phi \right )} - \frac{y_{0}^{2}}{2} \cos{\left (2 \phi \right )} - \frac{y_{0}^{2}}{2}}\right) \cos{\left (\phi \right )}" /></li>
+<li>y: <img src="eq37.png" alt="y_{0} + \left(- x_{0} \cos{\left (\phi \right )} - y_{0} \sin{\left (\phi \right )} - \sqrt{R^{2} + \frac{x_{0}^{2}}{2} \cos{\left (2 \phi \right )} - \frac{x_{0}^{2}}{2} + x_{0} y_{0} \sin{\left (2 \phi \right )} - \frac{y_{0}^{2}}{2} \cos{\left (2 \phi \right )} - \frac{y_{0}^{2}}{2}}\right) \sin{\left (\phi \right )}" /></li>
+</ul></li><li><ul><li>x: <img src="eq38.png" alt="x_{0} + \left(- x_{0} \cos{\left (\phi \right )} - y_{0} \sin{\left (\phi \right )} + \sqrt{R^{2} + \frac{x_{0}^{2}}{2} \cos{\left (2 \phi \right )} - \frac{x_{0}^{2}}{2} + x_{0} y_{0} \sin{\left (2 \phi \right )} - \frac{y_{0}^{2}}{2} \cos{\left (2 \phi \right )} - \frac{y_{0}^{2}}{2}}\right) \cos{\left (\phi \right )}" /></li>
+<li>y: <img src="eq39.png" alt="y_{0} + \left(- x_{0} \cos{\left (\phi \right )} - y_{0} \sin{\left (\phi \right )} + \sqrt{R^{2} + \frac{x_{0}^{2}}{2} \cos{\left (2 \phi \right )} - \frac{x_{0}^{2}}{2} + x_{0} y_{0} \sin{\left (2 \phi \right )} - \frac{y_{0}^{2}}{2} \cos{\left (2 \phi \right )} - \frac{y_{0}^{2}}{2}}\right) \sin{\left (\phi \right )}" /></li>
+</ul></li></ul><h5>C Code</h5>
+<pre>x = x0 + (-x0*cos(phi) - y0*sin(phi) - sqrt(pow(R, 2) + (1.0L/2.0L)*pow(x0, 2)*cos(2*phi) - 1.0L/2.0L*pow(x0, 2) + x0*y0*sin(2*phi) - 1.0L/2.0L*pow(y0, 2)*cos(2*phi) - 1.0L/2.0L*pow(y0, 2)))*cos(phi);</pre>
+<pre>y = y0 + (-x0*cos(phi) - y0*sin(phi) - sqrt(pow(R, 2) + (1.0L/2.0L)*pow(x0, 2)*cos(2*phi) - 1.0L/2.0L*pow(x0, 2) + x0*y0*sin(2*phi) - 1.0L/2.0L*pow(y0, 2)*cos(2*phi) - 1.0L/2.0L*pow(y0, 2)))*sin(phi);</pre>
+<pre>x = x0 + (-x0*cos(phi) - y0*sin(phi) + sqrt(pow(R, 2) + (1.0L/2.0L)*pow(x0, 2)*cos(2*phi) - 1.0L/2.0L*pow(x0, 2) + x0*y0*sin(2*phi) - 1.0L/2.0L*pow(y0, 2)*cos(2*phi) - 1.0L/2.0L*pow(y0, 2)))*cos(phi);</pre>
+<pre>y = y0 + (-x0*cos(phi) - y0*sin(phi) + sqrt(pow(R, 2) + (1.0L/2.0L)*pow(x0, 2)*cos(2*phi) - 1.0L/2.0L*pow(x0, 2) + x0*y0*sin(2*phi) - 1.0L/2.0L*pow(y0, 2)*cos(2*phi) - 1.0L/2.0L*pow(y0, 2)))*sin(phi);</pre>
+<h4>Distance inside</h4>
+<p>Distance between crossing points.</p>
+<img src="eq40.png" alt="2 \left\lvert{\sqrt{R^{2} + \frac{x_{0}^{2}}{2} \cos{\left (2 \phi \right )} - \frac{x_{0}^{2}}{2} + x_{0} y_{0} \sin{\left (2 \phi \right )} - \frac{y_{0}^{2}}{2} \cos{\left (2 \phi \right )} - \frac{y_{0}^{2}}{2}}}\right\rvert" />
+<h4>C Code</h4>
+<pre>sol1 = -x0*cos(phi) - y0*sin(phi) - sqrt(pow(R, 2) + (1.0L/2.0L)*pow(x0, 2)*cos(2*phi) - 1.0L/2.0L*pow(x0, 2) + x0*y0*sin(2*phi) - 1.0L/2.0L*pow(y0, 2)*cos(2*phi) - 1.0L/2.0L*pow(y0, 2));</pre><pre>sol2 = -x0*cos(phi) - y0*sin(phi) + sqrt(pow(R, 2) + (1.0L/2.0L)*pow(x0, 2)*cos(2*phi) - 1.0L/2.0L*pow(x0, 2) + x0*y0*sin(2*phi) - 1.0L/2.0L*pow(y0, 2)*cos(2*phi) - 1.0L/2.0L*pow(y0, 2));</pre><pre>distance = 2*fabs(sqrt(pow(R, 2) + (1.0L/2.0L)*pow(x0, 2)*cos(2*phi) - 1.0L/2.0L*pow(x0, 2) + x0*y0*sin(2*phi) - 1.0L/2.0L*pow(y0, 2)*cos(2*phi) - 1.0L/2.0L*pow(y0, 2)));</pre><hr/>

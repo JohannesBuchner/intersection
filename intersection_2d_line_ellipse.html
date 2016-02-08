@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8">
+      <title>2d_line - ellipse intersection -- Intersection formulas for 3d objects</title>
+  </head>
+  <body>
+<h2>2d_line - ellipse intersection</h2>
+<h4>Equation for 2d_line (cartesian)</h4>
+<ul>
+<li>x: <img src="eq1.png" alt="t + x_{0}" /></li>
+<li>y: <img src="eq2.png" alt="k t + y_{0}" /></li>
+</ul>
+<h4>Equation for ellipse (cartesian)</h4>
+<p>Assumed to be centred at 0, the coordinate system origin.</p>
+0=<img src="eq3.png" alt="-1 + \frac{y^{2}}{b^{2}} + \frac{x^{2}}{a^{2}}" />
+<h4>Intersection solutions</h4>
+<p>Parametric solution (t). Solutions were derived automatically using sympy.</p>
+<ul><li><img src="eq4.png" alt="\frac{1}{a^{2} k^{2} + b^{2}} \left(- a^{2} k y_{0} - b^{2} x_{0} + \sqrt{a^{2} b^{2} \left(a^{2} k^{2} + b^{2} - k^{2} x_{0}^{2} + 2 k x_{0} y_{0} - y_{0}^{2}\right)}\right)" /></li>
+<li><img src="eq5.png" alt="- \frac{1}{a^{2} k^{2} + b^{2}} \left(a^{2} k y_{0} + b^{2} x_{0} + \sqrt{a^{2} b^{2} \left(a^{2} k^{2} + b^{2} - k^{2} x_{0}^{2} + 2 k x_{0} y_{0} - y_{0}^{2}\right)}\right)" /></li>
+</ul><p>Points in cartesian coordinates (x, y, z)</p>
+<ul><li><ul><li>x: <img src="eq6.png" alt="x_{0} + \frac{1}{a^{2} k^{2} + b^{2}} \left(- a^{2} k y_{0} - b^{2} x_{0} + \sqrt{a^{2} b^{2} \left(a^{2} k^{2} + b^{2} - k^{2} x_{0}^{2} + 2 k x_{0} y_{0} - y_{0}^{2}\right)}\right)" /></li>
+<li>y: <img src="eq7.png" alt="\frac{k}{a^{2} k^{2} + b^{2}} \left(- a^{2} k y_{0} - b^{2} x_{0} + \sqrt{a^{2} b^{2} \left(a^{2} k^{2} + b^{2} - k^{2} x_{0}^{2} + 2 k x_{0} y_{0} - y_{0}^{2}\right)}\right) + y_{0}" /></li>
+</ul></li><li><ul><li>x: <img src="eq8.png" alt="x_{0} - \frac{1}{a^{2} k^{2} + b^{2}} \left(a^{2} k y_{0} + b^{2} x_{0} + \sqrt{a^{2} b^{2} \left(a^{2} k^{2} + b^{2} - k^{2} x_{0}^{2} + 2 k x_{0} y_{0} - y_{0}^{2}\right)}\right)" /></li>
+<li>y: <img src="eq9.png" alt="- \frac{k}{a^{2} k^{2} + b^{2}} \left(a^{2} k y_{0} + b^{2} x_{0} + \sqrt{a^{2} b^{2} \left(a^{2} k^{2} + b^{2} - k^{2} x_{0}^{2} + 2 k x_{0} y_{0} - y_{0}^{2}\right)}\right) + y_{0}" /></li>
+</ul></li></ul><h5>C Code</h5>
+<pre>x = x0 + (-pow(a, 2)*k*y0 - pow(b, 2)*x0 + sqrt(pow(a, 2)*pow(b, 2)*(pow(a, 2)*pow(k, 2) + pow(b, 2) - pow(k, 2)*pow(x0, 2) + 2*k*x0*y0 - pow(y0, 2))))/(pow(a, 2)*pow(k, 2) + pow(b, 2));</pre>
+<pre>y = k*(-pow(a, 2)*k*y0 - pow(b, 2)*x0 + sqrt(pow(a, 2)*pow(b, 2)*(pow(a, 2)*pow(k, 2) + pow(b, 2) - pow(k, 2)*pow(x0, 2) + 2*k*x0*y0 - pow(y0, 2))))/(pow(a, 2)*pow(k, 2) + pow(b, 2)) + y0;</pre>
+<pre>x = x0 - (pow(a, 2)*k*y0 + pow(b, 2)*x0 + sqrt(pow(a, 2)*pow(b, 2)*(pow(a, 2)*pow(k, 2) + pow(b, 2) - pow(k, 2)*pow(x0, 2) + 2*k*x0*y0 - pow(y0, 2))))/(pow(a, 2)*pow(k, 2) + pow(b, 2));</pre>
+<pre>y = -k*(pow(a, 2)*k*y0 + pow(b, 2)*x0 + sqrt(pow(a, 2)*pow(b, 2)*(pow(a, 2)*pow(k, 2) + pow(b, 2) - pow(k, 2)*pow(x0, 2) + 2*k*x0*y0 - pow(y0, 2))))/(pow(a, 2)*pow(k, 2) + pow(b, 2)) + y0;</pre>
+<h4>Distance inside</h4>
+<p>Distance between crossing points.</p>
+<img src="eq10.png" alt="2 \left\lvert{\frac{1}{a^{2} k^{2} + b^{2}} \sqrt{a^{2} b^{2} \left(a^{2} k^{2} + b^{2} - k^{2} x_{0}^{2} + 2 k x_{0} y_{0} - y_{0}^{2}\right)}}\right\rvert" />
+<h4>C Code</h4>
+<pre>sol1 = (-pow(a, 2)*k*y0 - pow(b, 2)*x0 + sqrt(pow(a, 2)*pow(b, 2)*(pow(a, 2)*pow(k, 2) + pow(b, 2) - pow(k, 2)*pow(x0, 2) + 2*k*x0*y0 - pow(y0, 2))))/(pow(a, 2)*pow(k, 2) + pow(b, 2));</pre><pre>sol2 = -(pow(a, 2)*k*y0 + pow(b, 2)*x0 + sqrt(pow(a, 2)*pow(b, 2)*(pow(a, 2)*pow(k, 2) + pow(b, 2) - pow(k, 2)*pow(x0, 2) + 2*k*x0*y0 - pow(y0, 2))))/(pow(a, 2)*pow(k, 2) + pow(b, 2));</pre><pre>distance = 2*fabs(sqrt(pow(a, 2)*pow(b, 2)*(pow(a, 2)*pow(k, 2) + pow(b, 2) - pow(k, 2)*pow(x0, 2) + 2*k*x0*y0 - pow(y0, 2)))/(pow(a, 2)*pow(k, 2) + pow(b, 2)));</pre><hr/>
+<h4>Equation for 2d_line (spherical)</h4>
+<ul>
+<li>x: <img src="eq11.png" alt="t \cos{\left (\phi \right )} + x_{0}" /></li>
+<li>y: <img src="eq12.png" alt="t \sin{\left (\phi \right )} + y_{0}" /></li>
+</ul>
+<h4>Equation for ellipse (cartesian)</h4>
+<p>Assumed to be centred at 0, the coordinate system origin.</p>
+0=<img src="eq13.png" alt="-1 + \frac{y^{2}}{b^{2}} + \frac{x^{2}}{a^{2}}" />
+<h4>Intersection solutions</h4>
+<p>Parametric solution (t). Solutions were derived automatically using sympy.</p>
+<ul><li><img src="eq14.png" alt="\frac{1}{a^{2} \sin^{2}{\left (\phi \right )} + b^{2} \cos^{2}{\left (\phi \right )}} \left(- a^{2} y_{0} \sin{\left (\phi \right )} - b^{2} x_{0} \cos{\left (\phi \right )} + \sqrt{a^{2} b^{2} \left(a^{2} \sin^{2}{\left (\phi \right )} + b^{2} \cos^{2}{\left (\phi \right )} - x_{0}^{2} \sin^{2}{\left (\phi \right )} + x_{0} y_{0} \sin{\left (2 \phi \right )} - y_{0}^{2} \cos^{2}{\left (\phi \right )}\right)}\right)" /></li>
+<li><img src="eq15.png" alt="- \frac{1}{a^{2} \sin^{2}{\left (\phi \right )} + b^{2} \cos^{2}{\left (\phi \right )}} \left(a^{2} y_{0} \sin{\left (\phi \right )} + b^{2} x_{0} \cos{\left (\phi \right )} + \sqrt{a^{2} b^{2} \left(a^{2} \sin^{2}{\left (\phi \right )} + b^{2} \cos^{2}{\left (\phi \right )} - x_{0}^{2} \sin^{2}{\left (\phi \right )} + x_{0} y_{0} \sin{\left (2 \phi \right )} - y_{0}^{2} \cos^{2}{\left (\phi \right )}\right)}\right)" /></li>
+</ul><p>Points in cartesian coordinates (x, y, z)</p>
+<ul><li><ul><li>x: <img src="eq16.png" alt="x_{0} + \frac{\cos{\left (\phi \right )}}{a^{2} \sin^{2}{\left (\phi \right )} + b^{2} \cos^{2}{\left (\phi \right )}} \left(- a^{2} y_{0} \sin{\left (\phi \right )} - b^{2} x_{0} \cos{\left (\phi \right )} + \sqrt{a^{2} b^{2} \left(a^{2} \sin^{2}{\left (\phi \right )} + b^{2} \cos^{2}{\left (\phi \right )} - x_{0}^{2} \sin^{2}{\left (\phi \right )} + x_{0} y_{0} \sin{\left (2 \phi \right )} - y_{0}^{2} \cos^{2}{\left (\phi \right )}\right)}\right)" /></li>
+<li>y: <img src="eq17.png" alt="y_{0} + \frac{\sin{\left (\phi \right )}}{a^{2} \sin^{2}{\left (\phi \right )} + b^{2} \cos^{2}{\left (\phi \right )}} \left(- a^{2} y_{0} \sin{\left (\phi \right )} - b^{2} x_{0} \cos{\left (\phi \right )} + \sqrt{a^{2} b^{2} \left(a^{2} \sin^{2}{\left (\phi \right )} + b^{2} \cos^{2}{\left (\phi \right )} - x_{0}^{2} \sin^{2}{\left (\phi \right )} + x_{0} y_{0} \sin{\left (2 \phi \right )} - y_{0}^{2} \cos^{2}{\left (\phi \right )}\right)}\right)" /></li>
+</ul></li><li><ul><li>x: <img src="eq18.png" alt="x_{0} - \frac{\cos{\left (\phi \right )}}{a^{2} \sin^{2}{\left (\phi \right )} + b^{2} \cos^{2}{\left (\phi \right )}} \left(a^{2} y_{0} \sin{\left (\phi \right )} + b^{2} x_{0} \cos{\left (\phi \right )} + \sqrt{a^{2} b^{2} \left(a^{2} \sin^{2}{\left (\phi \right )} + b^{2} \cos^{2}{\left (\phi \right )} - x_{0}^{2} \sin^{2}{\left (\phi \right )} + x_{0} y_{0} \sin{\left (2 \phi \right )} - y_{0}^{2} \cos^{2}{\left (\phi \right )}\right)}\right)" /></li>
+<li>y: <img src="eq19.png" alt="y_{0} - \frac{\sin{\left (\phi \right )}}{a^{2} \sin^{2}{\left (\phi \right )} + b^{2} \cos^{2}{\left (\phi \right )}} \left(a^{2} y_{0} \sin{\left (\phi \right )} + b^{2} x_{0} \cos{\left (\phi \right )} + \sqrt{a^{2} b^{2} \left(a^{2} \sin^{2}{\left (\phi \right )} + b^{2} \cos^{2}{\left (\phi \right )} - x_{0}^{2} \sin^{2}{\left (\phi \right )} + x_{0} y_{0} \sin{\left (2 \phi \right )} - y_{0}^{2} \cos^{2}{\left (\phi \right )}\right)}\right)" /></li>
+</ul></li></ul><h5>C Code</h5>
+<pre>x = x0 + (-pow(a, 2)*y0*sin(phi) - pow(b, 2)*x0*cos(phi) + sqrt(pow(a, 2)*pow(b, 2)*(pow(a, 2)*pow(sin(phi), 2) + pow(b, 2)*pow(cos(phi), 2) - pow(x0, 2)*pow(sin(phi), 2) + x0*y0*sin(2*phi) - pow(y0, 2)*pow(cos(phi), 2))))*cos(phi)/(pow(a, 2)*pow(sin(phi), 2) + pow(b, 2)*pow(cos(phi), 2));</pre>
+<pre>y = y0 + (-pow(a, 2)*y0*sin(phi) - pow(b, 2)*x0*cos(phi) + sqrt(pow(a, 2)*pow(b, 2)*(pow(a, 2)*pow(sin(phi), 2) + pow(b, 2)*pow(cos(phi), 2) - pow(x0, 2)*pow(sin(phi), 2) + x0*y0*sin(2*phi) - pow(y0, 2)*pow(cos(phi), 2))))*sin(phi)/(pow(a, 2)*pow(sin(phi), 2) + pow(b, 2)*pow(cos(phi), 2));</pre>
+<pre>x = x0 - (pow(a, 2)*y0*sin(phi) + pow(b, 2)*x0*cos(phi) + sqrt(pow(a, 2)*pow(b, 2)*(pow(a, 2)*pow(sin(phi), 2) + pow(b, 2)*pow(cos(phi), 2) - pow(x0, 2)*pow(sin(phi), 2) + x0*y0*sin(2*phi) - pow(y0, 2)*pow(cos(phi), 2))))*cos(phi)/(pow(a, 2)*pow(sin(phi), 2) + pow(b, 2)*pow(cos(phi), 2));</pre>
+<pre>y = y0 - (pow(a, 2)*y0*sin(phi) + pow(b, 2)*x0*cos(phi) + sqrt(pow(a, 2)*pow(b, 2)*(pow(a, 2)*pow(sin(phi), 2) + pow(b, 2)*pow(cos(phi), 2) - pow(x0, 2)*pow(sin(phi), 2) + x0*y0*sin(2*phi) - pow(y0, 2)*pow(cos(phi), 2))))*sin(phi)/(pow(a, 2)*pow(sin(phi), 2) + pow(b, 2)*pow(cos(phi), 2));</pre>
+<h4>Distance inside</h4>
+<p>Distance between crossing points.</p>
+<img src="eq20.png" alt="2 \left\lvert{\frac{1}{a^{2} \sin^{2}{\left (\phi \right )} + b^{2} \cos^{2}{\left (\phi \right )}} \sqrt{a^{2} b^{2} \left(a^{2} \sin^{2}{\left (\phi \right )} + b^{2} \cos^{2}{\left (\phi \right )} - x_{0}^{2} \sin^{2}{\left (\phi \right )} + x_{0} y_{0} \sin{\left (2 \phi \right )} - y_{0}^{2} \cos^{2}{\left (\phi \right )}\right)}}\right\rvert" />
+<h4>C Code</h4>
+<pre>sol1 = (-pow(a, 2)*y0*sin(phi) - pow(b, 2)*x0*cos(phi) + sqrt(pow(a, 2)*pow(b, 2)*(pow(a, 2)*pow(sin(phi), 2) + pow(b, 2)*pow(cos(phi), 2) - pow(x0, 2)*pow(sin(phi), 2) + x0*y0*sin(2*phi) - pow(y0, 2)*pow(cos(phi), 2))))/(pow(a, 2)*pow(sin(phi), 2) + pow(b, 2)*pow(cos(phi), 2));</pre><pre>sol2 = -(pow(a, 2)*y0*sin(phi) + pow(b, 2)*x0*cos(phi) + sqrt(pow(a, 2)*pow(b, 2)*(pow(a, 2)*pow(sin(phi), 2) + pow(b, 2)*pow(cos(phi), 2) - pow(x0, 2)*pow(sin(phi), 2) + x0*y0*sin(2*phi) - pow(y0, 2)*pow(cos(phi), 2))))/(pow(a, 2)*pow(sin(phi), 2) + pow(b, 2)*pow(cos(phi), 2));</pre><pre>distance = 2*fabs(sqrt(pow(a, 2)*pow(b, 2)*(pow(a, 2)*pow(sin(phi), 2) + pow(b, 2)*pow(cos(phi), 2) - pow(x0, 2)*pow(sin(phi), 2) + x0*y0*sin(2*phi) - pow(y0, 2)*pow(cos(phi), 2)))/(pow(a, 2)*pow(sin(phi), 2) + pow(b, 2)*pow(cos(phi), 2)));</pre><hr/>
