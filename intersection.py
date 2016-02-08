@@ -107,6 +107,7 @@ def _simplify(expression):
 findex = open('index.html', 'w')
 title = 'Line-Intersection formulae'
 header = open('header.html', 'r').read()
+footer = open('footer.html', 'r').read()
 findex.write(header % dict(title=title))
 findex.write("<h2>%s</h2>\n" % (title))
 findex.write("""<p>Ray tracing formulas for various 2d and 3d objects
@@ -182,7 +183,8 @@ for a, b in combinations:
 				fout.write("<h4>C Code</h4>\n")
 				fout.write("<pre>%s</pre>" % ccode(sol, assign_to="sol"))
 			fout.write("<hr/>\n")
-	
+	fout.write(footer)
+findex.write(footer)
 	
 	
 
